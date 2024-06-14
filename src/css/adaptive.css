@@ -1,0 +1,69 @@
+@media (max-width:1115px) {
+    .card {
+        justify-content: center;
+    }
+    .Library-card {
+        height: 857px;
+    }
+
+    .get-card {
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .youwill {
+        text-align: center;
+    }
+}
+
+@media (max-width: 1250px) {
+    .contacts {
+        height: 1055px;
+    }
+
+    .contacts-info {
+        flex-wrap: wrap;
+    }
+
+    .map {
+        margin-top: 100px;
+        margin-left: 15.5px;
+    }
+
+}
+
+@media (max-width: 1210px) {
+    .favorites-items {
+        justify-content: center;
+        height: 2340px;
+    }
+
+    .favorites {
+        max-height: 2629px;
+    }
+}
+
+
+@media (max-width:768px) {
+    .tablet {
+        display: flex;
+    }
+
+    .navigation {
+        width: 120px;
+    }
+
+    .image-items {
+        width: 460px;
+    }
+}
+
+@media (max-width:950px) {
+    .CoffeeShop {
+        height: 1481px;
+    }
+
+    .coffee {
+        margin: 40px 0;
+    }
+}
