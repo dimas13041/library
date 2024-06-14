@@ -8,16 +8,33 @@ p {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
 .header {
+    background-color: #0C0C0E;
+
+
+}
+
+.header__inner {
     display: flex;
     justify-content: space-between;
-    background-color: #0C0C0E;
+    align-items: center;
+    margin: auto 0;
+    height: 90px;
+
 }
 
 
 
 .broklin {
-    margin: 20px;
     color: white;
     font-family: 'Forum';
     font-style: normal;
@@ -30,12 +47,17 @@ p {
 .nav {
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
 .nav-list {
     list-style-type: none;
     display: flex;
     gap: 30px;
+}
+
+.nav-list li {
+    transition: all .3s ease;
 }
 
 .list {
@@ -48,10 +70,43 @@ p {
     color: white;
 }
 
+.nav-list li:hover {
+    transform: scale(1.2);
+}
+
 .profile {
     display: flex;
-    margin-right: 20px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.burger-btn {
+    display: none;
+    padding: 5px;
     margin-left: 40px;
+    cursor: pointer;
+}
+
+.burger-btn span {
+    transition: .2s ease all;
+}
+
+.top {
+    width: 45px;
+    height: 2px;
+    background-color: #fff;
+}
+
+.mid {
+    width: 45px;
+    height: 2px;
+    background-color: #fff;
+}
+
+.bot {
+    width: 45px;
+    height: 2px;
+    background-color: #fff;
 }
 
 .welcome-bg {
@@ -214,7 +269,7 @@ p {
 
 .season {
     display: flex;
-    align-items:center;
+    align-items: center;
 }
 
 input[type="radio"] {
@@ -288,7 +343,7 @@ input[type="radio"]:checked+label {
     font-weight: 700;
     font-size: 15px;
     line-height: 40px;
-    letter-spacing: 2px; 
+    letter-spacing: 2px;
 }
 
 .desc-book {
@@ -665,4 +720,3 @@ input[type="text"]::placeholder {
     letter-spacing: 2px;
     color: #FFFFFF;
 }
-

@@ -1,21 +1,3 @@
-@media (max-width:1115px) {
-    .card {
-        justify-content: center;
-    }
-    .Library-card {
-        height: 857px;
-    }
-
-    .get-card {
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .youwill {
-        text-align: center;
-    }
-}
-
 @media (max-width: 1250px) {
     .contacts {
         height: 1055px;
@@ -43,6 +25,74 @@
     }
 }
 
+@media (max-width:1115px) {
+ 
+    .nav-list {
+        transform: translateY(-200%);
+        position: absolute;
+        top: 90px;
+        right: 0;
+        flex-direction: column;
+        z-index: 1;
+        background-color:#0C0C0E;
+        padding: 0 107px 100px;
+        text-align: center;
+        transition: all .5s ease;
+    }
+
+    .nav-list--opened  {
+        transform: translateY(0%);
+    }
+
+    .burger-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .opened .top {
+        transform: rotate(45deg);
+        transform-origin: 9% 15%;
+
+    } 
+    .opened .mid {
+        opacity: 0;
+        
+    } 
+    .opened .bot {
+        transform: rotate(-45deg);
+        transform-origin: 15% 95%;
+        
+    }
+
+    .card {
+        justify-content: center;
+    }
+
+    .Library-card {
+        height: 857px;
+    }
+
+    .get-card {
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .youwill {
+        text-align: center;
+    }
+}
+
+@media (max-width:950px) {
+    .CoffeeShop {
+        height: 1481px;
+    }
+
+    .coffee {
+        margin: 40px 0;
+    }
+}
+
 
 @media (max-width:768px) {
     .tablet {
@@ -55,15 +105,5 @@
 
     .image-items {
         width: 460px;
-    }
-}
-
-@media (max-width:950px) {
-    .CoffeeShop {
-        height: 1481px;
-    }
-
-    .coffee {
-        margin: 40px 0;
     }
 }
