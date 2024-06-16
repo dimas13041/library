@@ -26,43 +26,47 @@
 }
 
 @media (max-width:1115px) {
- 
+
     .nav-list {
-        transform: translateY(-200%);
+        height: 0;
+        box-sizing: border-box;
         position: absolute;
         top: 90px;
         right: 0;
         flex-direction: column;
-        z-index: 1;
-        background-color:#0C0C0E;
-        padding: 0 107px 100px;
+        background-color: #0C0C0E;
+        padding: 0 107px;
         text-align: center;
-        transition: all .5s ease;
+        transition: all .3s ease;
+        overflow: hidden;
     }
 
-    .nav-list--opened  {
-        transform: translateY(0%);
+    .nav-list--opened {
+        height: 470px;
     }
 
     .burger-btn {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        position: relative;
     }
 
     .opened .top {
         transform: rotate(45deg);
         transform-origin: 9% 15%;
 
-    } 
+    }
+
     .opened .mid {
         opacity: 0;
-        
-    } 
+
+    }
+
     .opened .bot {
         transform: rotate(-45deg);
         transform-origin: 15% 95%;
-        
+
     }
 
     .card {
