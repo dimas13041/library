@@ -1,3 +1,19 @@
+class Modal {
+  constructor(modal) {
+    this.modal = modal;
+  }
+
+  show() {
+    this.modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  hide() {
+    this.modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
 const btn = document.querySelector('.burger-btn'),
   menu = document.querySelector('.nav-list'),
   inputs = document.querySelectorAll('[data-season]'),
@@ -5,11 +21,10 @@ const btn = document.querySelector('.burger-btn'),
   profileIcon = document.querySelector('[data-profileIcon]'),
   menuNoAuth = document.querySelector('.menu__no-auth'),
   menuAuth = document.querySelector('.menu__auth'),
-  modalLogIn = document.querySelector('#modalLogIn'),
-  modalReg = document.querySelector('#modalReg'),
   btnsLogIn = document.querySelectorAll('[data-LogIn]'),
   modal = document.querySelectorAll('.modal'),
   body = document.querySelector('body'),
+  btnsBuy = document.querySelectorAll('.buy')
   btnReg = document.querySelector('[data-register]'),
   formLog = document.querySelector('#formLog'),
   btnsReg = document.querySelectorAll('[data-Reg]'),
@@ -17,16 +32,44 @@ const btn = document.querySelector('.burger-btn'),
   forms = document.querySelectorAll('.modal__inner')
   formReg = document.querySelector('#formReg'),
   btnProf = document.querySelector('[data-profile]'),
-  modalProf = document.querySelector('#modalProfile'),
+  modalReg = new Modal(document.querySelector('#modalReg')),
+  modalLogIn = new Modal(document.querySelector('#modalLogIn')),
+  modalProf = new Modal(document.querySelector('#modalProfile')),
+  modalCard = new Modal(document.querySelector('#modalCard')),
   modalIcon = document.querySelector('.modal__icon'),
   modalName = document.querySelector('.modal__name'),
   modalCounter = document.querySelector('.modal__counter')
   modalCardNumber = document.querySelector('.modal__card-number'),
   iconAuth = document.querySelector('.icon__auth'),
+  buyForm = document.querySelector('.buy__form'),
+  inputsBuyForm = buyForm.querySelectorAll('input'),
+  btnBuyInForm = document.querySelector('#buyInForm'),
+  inputCardNumber = document.querySelector('#cardNumber')
   dataStorage = JSON.parse(localStorage.getItem('formData'));
   window.addEventListener('DOMContentLoaded', () => {
   checkLoginAndLogIn();
 
+
+  inputCardNumber.addEventListener('input', (e) => {
+    let value = e.target.value;
+    value = value.replace(/\s+/g, '').replace(/(\d{4})/g, '$1 ').trim();
+    e.target.value = value;
+  });
+  
+
+  function checkInputs() {
+    let allFilled = true;
+    inputsBuyForm.forEach(function(input) {
+      if (input.value === '') {
+        allFilled = false;
+      }
+    });
+    btnBuyInForm.disabled = !allFilled;
+  }
+
+  inputsBuyForm.forEach(function(input) {
+    input.addEventListener('keyup', checkInputs);
+  });
 
   function checkLoginAndLogIn() {
     const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
@@ -47,11 +90,17 @@ const btn = document.querySelector('.burger-btn'),
   }
   
 
+  function updateBtn () {
+    btnsBuy.forEach((btn) => {
+      btn.setAttribute('data-buy', '');
+    })
+  }
   
   function LogIn() {
     closeModal();
     updateIcon();
     postNumber();
+    updateBtn();
     iconAuth.setAttribute('title', searchItem('FullName'));
     modalName.textContent = searchItem('FullName');
   };
@@ -122,10 +171,10 @@ const btn = document.querySelector('.burger-btn'),
   
 
   function closeModal() {
-    modalLogIn.classList.remove('show');
-    modalReg.classList.remove('show');
-    modalProf.classList.remove('show')
-    document.body.style.overflow = '';
+    modalLogIn.hide();
+    modalReg.hide();
+    modalProf.hide();
+    modalCard.hide();
     forms.forEach(form => form.reset());
   };
   
@@ -149,13 +198,6 @@ const btn = document.querySelector('.burger-btn'),
   });
   
   
-
-  // document.addEventListener('keydown', (e) => {
-  //   if (e.code === "Space") {
-  //     LogIn();
-  //   };
-  // });
-
   
 
   btnLogOut.addEventListener('click', () => {
@@ -176,27 +218,29 @@ const btn = document.querySelector('.burger-btn'),
 
   //Modal open/clos
 
-  btnProf.addEventListener('click', () => {
-    modalProf.classList.add('show');
-    document.body.style.overflow = 'hidden';
-  });
-
-  btnsLogIn.forEach(btnl => {
-    btnl.addEventListener('click', () => {
-      modalLogIn.classList.add('show');
-      modalReg.classList.remove('show');
-      document.body.style.overflow = 'hidden';
-    });
-  });
 
 
-  btnsReg.forEach(btnr => {
-    btnr.addEventListener('click', () => {
-      modalReg.classList.add('show');
-      modalLogIn.classList.remove('show');
-      document.body.style.overflow = 'hidden';
-    });
+  
+  
+
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('[data-profile]')) {
+      modalProf.show();
+    } else if (event.target.matches('[data-LogIn]')) {
+      modalLogIn.show();
+      modalReg.hide();
+    } else if (event.target.matches('[data-Reg]')) {
+      modalReg.show();
+      modalLogIn.hide();
+    } else if (event.target.matches('[data-buy]')) {
+      modalCard.show();
+    } else if (event.target.matches('.buy')) {
+      modalLogIn.show();
+    } 
   });
+  
+  
+
 
   body.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal__close')) {

@@ -141,7 +141,7 @@
                     <p class="writter">By Rachel Harrison</p>
                     <p class="desc-book">Are your Halloween movies of choice The Witches of Eastwick and Practical
                         Magic? Look no further than here - where a woman recovering from a breakup moves to a quaint
-                        town in upstate New York and befriends a beautiful witch.</p>
+                        tbuy in upstate New York and befriends a beautiful witch.</p>
                     <button class="buy">Buy</button>
                 </div>
                 <img src="src/images/book2.jpg" alt="" class="book">
@@ -169,7 +169,7 @@
                     <p class="desc-book">A timely and revelatory new biography of Queen Elizabeth (and her family)
                         exploring how the Windsors have evolved and thrived as the modern world has changed around
                         them.</p>
-                    <button class="Own">Own</button>
+                    <button class="buy">Buy</button>
                 </div>
                 <img src="src/images/book4.jpg" alt="" class="book">
             </div>
@@ -224,7 +224,7 @@
                     <p class="desc-book">An epic saga of seven generations of one family encompasses the tumultuous
                         history of Hawaii as a Hawaiian woman gathers her four granddaughters together in an erotic
                         tale of villains and dreamers, queens and revolutionaries, lepers and healers.</p>
-                    <button class="Own">Own</button>
+                    <button class="buy">Buy</button>
                 </div>
                 <img src="src/images/book12.jpg" alt="" class="book">
             </div>
@@ -275,7 +275,7 @@
                     <p class="desc-book">A fascinating story of a teenage girl who marries a man twice her age with
                         the promise to bring her to America. Her marriage is an opportunity for her family to
                         eventually immigrate. For fans of Isabel Allende and Julia Alvarez.</p>
-                    <button class="Own">Own</button>
+                    <button class="buy">Buy</button>
                 </div>
                 <img src="src/images/book8.jpg" alt="" class="book">
             </div>
@@ -329,7 +329,7 @@
                     <p class="desc-book">Exes Tegan and Sara find themselves chained together by hairballs of
                         codependency. A father and child experience the shared trauma of giving birth to gods from
                         their wounds.</p>
-                    <button class="Own">Own</button>
+                    <button class="buy">Buy</button>
                 </div>
                 <img src="src/images/book16.jpg" alt="" class="book">
             </div>
@@ -520,7 +520,7 @@
     </div>
     <div class="modal" id="modalReg">
         <div class="modal__reg">
-            <img class="modal__close" src="src/images/close_btn.svg" alt="">
+            <img class="modal__close " src="src/images/close_btn.svg" alt="">
             <h4 class="modal__title">
                 Register
             </h4>
@@ -529,13 +529,15 @@
                     <label class="modal__text">
                         First name
                     </label>
-                    <input required class="modal__input" id="firstName" type="text" title="Only English letters are allowed" pattern="[A-Za-z]+">
+                    <input required class="modal__input" id="firstName" type="text"
+                        title="Only English letters are allowed" pattern="[A-Za-z]+">
                 </div>
                 <div class="form-item">
                     <label class="modal__text">
                         Last name
                     </label>
-                    <input required class="modal__input" id="lastName" type="text" title="Only English letters are allowed" pattern="[A-Za-z]+">
+                    <input required class="modal__input" id="lastName" type="text"
+                        title="Only English letters are allowed" pattern="[A-Za-z]+">
                 </div>
                 <div class="form-item">
                     <label class="modal__text">
@@ -559,7 +561,7 @@
     </div>
     <div class="modal" id="modalProfile">
         <div class="modal__profile">
-            <img class="modal__close" src="src/images/close_btn.svg" alt="">
+            <img class="modal__close prof" src="src/images/close_btn.svg" alt="">
             <div class="modal__sidebar">
                 <div class="modal__icon"></div>
                 <p class="modal__name"></p>
@@ -599,6 +601,54 @@
                     <p class="modal__card-number"></p>
                     <img class="modal__card-copy" src="src/images/icon-copy.svg" alt="">
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modalCard">
+        <div class="modal__buy">
+            <div class="buy__header">
+                <h4 class="buy__header-title">Buy a library card</h4>
+                <img class="modal__close prof" src="src/images/close_btn-white.svg" alt="">
+            </div>
+            <div class="buy__content">
+                <form class="buy__form">
+                    <div class="form-item">
+                        <lebel class="modal__text">Bank card number</lebel>
+                        <input required class="modal__input" maxlength="19" pattern="(?:\d{4}\s?){4}" id="cardNumber" type="text">
+                    </div>
+                    <div>
+                        <lebel class="modal__text">Expiration code</lebel>
+                        <div class="exp-code__inner">
+                            <input required class="modal__input exp-code" pattern="[0-9]{2}" maxlength="2" type="text">
+                            <input required class="modal__input exp-code" pattern="[0-9]{2}" maxlength="2" type="text">
+                        </div>
+                    </div>
+                    <div>
+                        <lebel class="modal__text">CVC</lebel>
+                        <input required class="modal__input exp-code" pattern="[0-9]{3}" maxlength="3" type="text">
+                    </div>
+                    <div class="form-item" style="margin-top: 10px;">
+                        <lebel class="modal__text">Cardholder name</lebel>
+                        <input required class="modal__input" type="text">
+                    </div>
+                    <div class="form-item">
+                        <lebel class="modal__text">Postal code</lebel>
+                        <input required class="modal__input" type="text">
+                    </div>
+                    <div class="form-item">
+                        <lebel class="modal__text">City / Tbuy</lebel>
+                        <input required class="modal__input" type="text">
+                    </div>
+                    <div class="form__aside">
+                        <button id="buyInForm">Buy</button>
+                        <span>$ 25.00</span>
+                    </div>
+                </form>
+                <p class="buy__content-text">
+                    If you are live, work, attend school, or pay property taxes in New York State, you can get a $25
+                    digital library card right now using this online form. Visitors to New York State can also use this
+                    form to apply for a temporary card.
+                </p>
             </div>
         </div>
     </div>

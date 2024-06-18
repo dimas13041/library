@@ -470,7 +470,11 @@ input[type="radio"]:checked+label {
     transition: all 0.3s ease;
 }
 
-.buy:hover {
+.buy:disabled {
+    cursor: default;
+}
+
+.buy:not(:disabled):hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
 }
@@ -885,9 +889,14 @@ input[type="radio"]:checked+label {
     color: #000000;
 }
 
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .modal__input {
     box-sizing: border-box;
-    margin-top: 10px;
     width: 100%;
     height: 20px;
     border: 1px solid #BB945F;
@@ -943,6 +952,10 @@ input[type="radio"]:checked+label {
     gap: 15px;
 }
 
+.prof {
+    top: 25px;
+    right: 25px;
+}
 
 .modal__icon {
     width: 80px;
@@ -957,8 +970,6 @@ input[type="radio"]:checked+label {
     font-size: 20px;
     line-height: 20px;
     color: #BB945F;
-
-
 }
 
 .modal__name {
@@ -1085,7 +1096,107 @@ input[type="radio"]:checked+label {
     cursor: pointer;
 }
 
+.modal__buy {
+    width: 640px;
+    height: 540px;
+    margin: 90px auto;
+}
 
+.buy__header {
+    background-color: #0C0C0E;
+    padding: 20px 0;
+    position: relative;
+}
+
+.buy__header-title {
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.buy__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px 40px;
+    background-color: #fff;
+}
+
+.buy__form {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.exp-code__inner {
+    display: flex;
+}
+
+.exp-code {
+    width: 45px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.buy__content-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    color: #8E8E8E;
+    width: 330px;
+}
+
+.form__aside {
+    display: flex;
+}
+
+#buyInForm {
+    margin-top: 10px;
+    width: 75px;
+    height: 30px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 12px;
+    background-color: white;
+    border: 1px solid #0C0C0E;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#buyInForm:disabled {
+    cursor: default;
+}
+
+#buyInForm:not(:disabled):hover {
+    background-color: #BB945F;
+    border: 1px solid #BB945F;
+}
+
+.form__aside span {
+    margin-left: 25px;
+    margin-top: auto;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0C0C0E;
+}
 
 .none {
     display: none;
@@ -1094,4 +1205,3 @@ input[type="radio"]:checked+label {
 .show {
     display: flex;
 }
-
