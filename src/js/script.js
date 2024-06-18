@@ -46,20 +46,20 @@ const btn = document.querySelector('.burger-btn'),
   btnBuyInForm = document.querySelector('#buyInForm'),
   inputCardNumber = document.querySelector('#cardNumber')
   dataStorage = JSON.parse(localStorage.getItem('formData'));
-  window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
   checkLoginAndLogIn();
 
-
+  // Space interval in inputs Card Number
   inputCardNumber.addEventListener('input', (e) => {
     let value = e.target.value;
     value = value.replace(/\s+/g, '').replace(/(\d{4})/g, '$1 ').trim();
     e.target.value = value;
   });
-  
 
+  // Check fill inputs in modal Buy Card
   function checkInputs() {
     let allFilled = true;
-    inputsBuyForm.forEach(function(input) {
+    inputsBuyForm.forEach(function (input) {
       if (input.value === '') {
         allFilled = false;
       }
@@ -67,35 +67,35 @@ const btn = document.querySelector('.burger-btn'),
     btnBuyInForm.disabled = !allFilled;
   }
 
-  inputsBuyForm.forEach(function(input) {
+  inputsBuyForm.forEach(function (input) {
     input.addEventListener('keyup', checkInputs);
   });
-
+// Check login user
   function checkLoginAndLogIn() {
     const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
     const loggedInUser = dataStorage.find(user => user.loginStatus === true);
-    
+
     if (loggedInUser) {
       LogIn();
       loggedInUser.visitsCounter = (loggedInUser.visitsCounter || 0) + 1;
       localStorage.setItem('formData', JSON.stringify(dataStorage));
     }
   }
-  
+// Search item by ke in local storage
   function searchItem(property) {
     const foundObj = dataStorage.find(obj => obj.loginStatus === true);
     if (foundObj && foundObj.hasOwnProperty(property)) {
       return foundObj[property];
     }
   }
-  
 
-  function updateBtn () {
+// Update buttons in section Favorites after login
+  function updateBtn() {
     btnsBuy.forEach((btn) => {
       btn.setAttribute('data-buy', '');
     })
   }
-  
+// Function login 
   function LogIn() {
     closeModal();
     updateIcon();
@@ -104,18 +104,18 @@ const btn = document.querySelector('.burger-btn'),
     iconAuth.setAttribute('title', searchItem('FullName'));
     modalName.textContent = searchItem('FullName');
   };
-  
+  // Get capitalize first letters for profile
   function capitalizeFirstLetters(str) {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
-
+// add number for profile
   function postNumber() {
     const menuTitle = menuAuth.firstElementChild;
     menuTitle.textContent = searchItem('cardNumber');
     modalCardNumber.textContent = searchItem('cardNumber');
   };
-  
-  
+
+//  search initials, counters, toggle icons, update info in icons
   function updateIcon() {
     const initials = searchItem('FullName').match(/\b\w/g).join('');
     const counter = searchItem('visitsCounter');
@@ -125,22 +125,22 @@ const btn = document.querySelector('.burger-btn'),
     modalIcon.textContent = initials;
     modalCounter.textContent = counter;
   };
-  
+  // generate card number
   function generateCardNumber() {
     const hexNumber = Math.floor(Math.random() * 0x1000000000).toString(16);
     return hexNumber.padStart(9, '0');
   };
-  
-  function updateLoginStatus(newStatus) {
+  //check login status and toggle false
+  function updateLoginStatus() {
     const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
     const loggedInUser = dataStorage.find(user => user.loginStatus === true);
-    
+
     if (loggedInUser) {
-      loggedInUser.loginStatus = newStatus;
+      loggedInUser.loginStatus = false;
       localStorage.setItem('formData', JSON.stringify(dataStorage));
     }
   }
-  
+  // function sig in
   function SignIn(form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -149,7 +149,7 @@ const btn = document.querySelector('.burger-btn'),
       const value2 = document.getElementById('lastName').value;
       const combinedValue = value1 + ' ' + value2;
       const cardNumber = generateCardNumber();
-      
+
       const formSubmission = {
         ...Object.fromEntries(formData.entries()),
         FullName: capitalizeFirstLetters(combinedValue),
@@ -157,7 +157,7 @@ const btn = document.querySelector('.burger-btn'),
         loginStatus: true,
         visitsCounter: 1
       };
-  
+
       const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
       dataStorage.push(formSubmission);
       localStorage.setItem('formData', JSON.stringify(dataStorage));
@@ -165,11 +165,11 @@ const btn = document.querySelector('.burger-btn'),
       LogIn();
     });
   };
-  
-
   SignIn(formReg);
-  
 
+
+
+// close modals
   function closeModal() {
     modalLogIn.hide();
     modalReg.hide();
@@ -177,52 +177,48 @@ const btn = document.querySelector('.burger-btn'),
     modalCard.hide();
     forms.forEach(form => form.reset());
   };
-  
 
+  // check match login and pass
   formLog.addEventListener('submit', (e) => {
     e.preventDefault();
     const login = document.querySelector('#login').value;
     const pass = document.querySelector('#pass').value;
     const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
-  
+
     dataStorage.forEach(obj => {
       const isPasswordMatch = obj.password === pass;
       const isLoginMatch = obj.cardNumber === login || obj.email === login;
-  
+
       if (isPasswordMatch && isLoginMatch) {
-        obj.loginStatus = true; 
-        localStorage.setItem('formData', JSON.stringify(dataStorage)); 
+        obj.loginStatus = true;
+        localStorage.setItem('formData', JSON.stringify(dataStorage));
         checkLoginAndLogIn()
       }
     });
   });
-  
-  
-  
 
+
+
+  //  log out
   btnLogOut.addEventListener('click', () => {
-    updateLoginStatus(false);
+    updateLoginStatus();
     updateIcon();
   });
-  
-  
-  
 
 
-  //Burger menu
+
+
+
+  //Toggle Burger menu
 
   btn.addEventListener('click', (e) => {
     btn.classList.toggle('opened');
     menu.classList.toggle('nav-list--opened');
   });
 
-  //Modal open/clos
-
-
-
   
   
-
+  //toggle Modal 
   document.addEventListener('click', (event) => {
     if (event.target.matches('[data-profile]')) {
       modalProf.show();
@@ -236,17 +232,19 @@ const btn = document.querySelector('.burger-btn'),
       modalCard.show();
     } else if (event.target.matches('.buy')) {
       modalLogIn.show();
-    } 
+    }
   });
-  
-  
 
 
+
+  // close modal if click on X
   body.addEventListener('click', (e) => {
     if (e.target.classList.contains('modal__close')) {
       closeModal();
     }
   });
+
+// close modal if click outside
 
   modal.forEach(e => {
     e.addEventListener('mousedown', (event) => {
@@ -257,6 +255,8 @@ const btn = document.querySelector('.burger-btn'),
     })
   });
 
+// close modal if press Escape
+
   document.addEventListener('keydown', (e) => {
     if (e.code === "Escape") {
       closeModal();
@@ -264,8 +264,8 @@ const btn = document.querySelector('.burger-btn'),
   });
 
 
-  //menu
-
+  
+  //Toggle menu if no authorisation
 
   document.addEventListener('click', (e) => {
     if (e.target !== profileIcon) {
@@ -276,6 +276,7 @@ const btn = document.querySelector('.burger-btn'),
       menu.classList.remove('nav-list--opened');
     }
   })
+//Toggle menu if yes authorisation
 
   document.addEventListener('click', (e) => {
     if (e.target !== iconAuth) {
