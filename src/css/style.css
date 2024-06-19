@@ -645,16 +645,34 @@ input[type="radio"]:checked+label {
     margin-bottom: 20px;
 }
 
-.input-text {
+.card-inputs__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.card-input {
     width: 100%;
     height: 66px;
     border: none;
     border-radius: 10px;
     padding: 8px 0 8px 20px;
     box-sizing: border-box;
+    font-family: 'Forum';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: 0.02em;
+    color: #BB945F;
 }
 
-.input-text::placeholder {
+.card-input:-webkit-autofill,
+.card-input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+.card-input::placeholder {
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
@@ -665,8 +683,18 @@ input[type="radio"]:checked+label {
 }
 
 .input-text {
-    display: flex;
-    align-items: center;
+    background-color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    height: 66px;
+    border-radius: 10px;
+    padding: 8px 0 8px 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: 0.02em;
+    color: #BB945F;
 }
 
 .check-card {
@@ -674,6 +702,7 @@ input[type="radio"]:checked+label {
     justify-content: center;
     margin-top: 20px;
 }
+
 
 .check {
     width: 242px;
@@ -691,19 +720,26 @@ input[type="radio"]:checked+label {
     transition: all 0.2s ease;
 }
 
+.counters-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
 .check:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
 }
 
-.get-card {
+.getcard {
     width: 456px;
     display: flex;
-    align-items: flex-end;
     flex-direction: column;
+    align-items: flex-end;
 }
 
-.getcard {
+.getcard-title {
     font-family: 'Forum';
     font-style: normal;
     font-weight: 400;
@@ -711,9 +747,10 @@ input[type="radio"]:checked+label {
     line-height: 33px;
     letter-spacing: 0.02em;
     margin-bottom: 35px;
+    text-align: right;
 }
 
-.youwill {
+.getcard-text {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -724,24 +761,26 @@ input[type="radio"]:checked+label {
     margin-bottom: 35px;
 }
 
+.visit-profile {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    gap: 35px;
+    width: 456px;
+}
+
 
 .sign-up {
-    width: 75px;
-    height: 30px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 10px;
-    line-height: 12px;
-    background-color: white;
-    border: 1px solid #0C0C0E;
-    border-radius: 2px;
     margin-right: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.log-in {
+.sign-login {
+    display: flex;
+    width: 170px;
+    justify-content: space-between;
+}
+
+.sign-login-btn {
     width: 75px;
     height: 30px;
     font-family: 'Inter';
@@ -756,8 +795,7 @@ input[type="radio"]:checked+label {
     transition: all 0.3s ease;
 }
 
-.sign-up:hover,
-.log-in:hover {
+.sign-login-btn:hover {
     background-color: #BB945F;
     border: 1px solid #BB945F;
 }

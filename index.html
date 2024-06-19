@@ -444,25 +444,59 @@
         <div class="card">
             <div class="find-card">
                 <p class="find">Find your Library card</p>
-                <div class="card-body">
+                <form class="card-body">
                     <div class="card-bg">
-                        <p class="card-title">Brooklyn Public Library</p>
-                        <input type="text" id="input-text" name="input-text" class="input-text"
-                            placeholder="Reader's name" style="margin-bottom: 25px;">
-                        <input type="text" id="input-number" name="input-number" class="input-text"
-                            placeholder="Card number">
+                        <h5 class="card-title">Brooklyn Public Library</h5>
+                        <div class="card-inputs__inner">
+                            <input type="text" id="inputName" name="input-text" class="card-input"
+                                placeholder="Reader's name" >
+                            <input type="text" id="inputNumber" name="input-number" class="card-input"
+                                placeholder="Card number">
+                                <p class="input-text none" id="PText"></p>
+                                <p class="input-text none" id="PNum"></p>
+                        </div>
                     </div>
-                    <div class="check-card"><button class="check">Check the card</button></div>
-                </div>
+                    <div class="check-card" style="margin-top: 15px;">
+                        <button class="check">Check the card</button>
+                        <div class="modal__counters none">
+                            <div class="counters-item">
+                                <p class="counter__title">
+                                    Visits
+                                </p>
+                                <img src="src/images/visits.svg" alt="">
+                                <p data-visitCounter class="modal__counter"></p>
+                            </div>
+                            <div class="counters-item">
+                                <p class="counter__title">
+                                    Bonuses
+                                </p>
+                                <img src="src/images/bonuses.svg" alt="">
+                                <p class="modal__counter">1240</p>
+                            </div>
+                            <div class="counters-item">
+                                <p id="counterBooks" class="counter__title">
+                                    Books
+                                </p>
+                                <img src="src/images/book.svg" alt="">
+                                <p class="modal__counter"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="get-card">
-                <p class="getcard">Get a reader card</p>
-                <p class="youwill">You will be able to see a reader card after logging into account or you can
+            <div class="getcard">
+                <p class="getcard-title">Get a reader card</p>
+                <p class="getcard-text">You will be able to see a reader card after logging into account or you can
                     register a new account</p>
                 <div class="sign-login">
-                    <button data-Reg class="sign-up">Sign Up</button>
-                    <button data-LogIn class="log-in">Log in</button>
+                    <button data-Reg class="sign-login-btn">Sign Up</button>
+                    <button data-LogIn class="sign-login-btn">Log in</button>
                 </div>
+            </div>
+            <div class="visit-profile none">
+                <h5 class="getcard-title">Visit your profile</h5>
+                <p class="getcard-text">With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.</p>
+                <button class="sign-login-btn" data-profile>Profile</button>
             </div>
         </div>
     </section>
@@ -570,11 +604,11 @@
                 <h4 class="modal__content-title">My profile</h4>
                 <div class="modal__counters">
                     <div class="modal__counters-item">
-                        <p id="counterVisits" class="counter__title">
+                        <p class="counter__title">
                             Visits
                         </p>
                         <img src="src/images/visits.svg" alt="">
-                        <p class="modal__counter"></p>
+                        <p data-visitCounter class="modal__counter"></p>
                     </div>
                     <div class="modal__counters-item">
                         <p class="counter__title">

@@ -1,3 +1,13 @@
+class NewUser {
+  constructor(fullName, email, password, cardNumber, statusLogin, counter) {
+    this.fullName = fullName;
+    this.email = email;
+    this.password = password;
+    this.loginStatus = statusLogin;
+    this.cardNumber = cardNumber;
+    this.counter = counter;
+  }
+}
 class Modal {
   constructor(modal) {
     this.modal = modal;
@@ -21,31 +31,40 @@ const btn = document.querySelector('.burger-btn'),
   profileIcon = document.querySelector('[data-profileIcon]'),
   menuNoAuth = document.querySelector('.menu__no-auth'),
   menuAuth = document.querySelector('.menu__auth'),
-  btnsLogIn = document.querySelectorAll('[data-LogIn]'),
   modal = document.querySelectorAll('.modal'),
   body = document.querySelector('body'),
-  btnsBuy = document.querySelectorAll('.buy')
+  btnBuyInForm = document.querySelector('#buyInForm'),
   btnReg = document.querySelector('[data-register]'),
-  formLog = document.querySelector('#formLog'),
+  btnCheck = document.querySelector('.check')
+btnsLogIn = document.querySelectorAll('[data-LogIn]'),
+  btnsBuy = document.querySelectorAll('.buy'),
   btnsReg = document.querySelectorAll('[data-Reg]'),
   btnLogOut = document.querySelector('[data-logout]'),
-  forms = document.querySelectorAll('.modal__inner')
-  formReg = document.querySelector('#formReg'),
-  btnProf = document.querySelector('[data-profile]'),
+  formLog = document.querySelector('#formLog'),
+  forms = document.querySelectorAll('form')
+formReg = document.querySelector('#formReg'),
+formCardBody = document.querySelector('.card-body')
   modalReg = new Modal(document.querySelector('#modalReg')),
   modalLogIn = new Modal(document.querySelector('#modalLogIn')),
   modalProf = new Modal(document.querySelector('#modalProfile')),
   modalCard = new Modal(document.querySelector('#modalCard')),
   modalIcon = document.querySelector('.modal__icon'),
-  modalName = document.querySelector('.modal__name'),
-  modalCounter = document.querySelector('.modal__counter')
   modalCardNumber = document.querySelector('.modal__card-number'),
-  iconAuth = document.querySelector('.icon__auth'),
+  modalName = document.querySelector('.modal__name'),
+  visitsCounter = document.querySelectorAll('[data-visitCounter]')
+iconAuth = document.querySelector('.icon__auth'),
   buyForm = document.querySelector('.buy__form'),
   inputsBuyForm = buyForm.querySelectorAll('input'),
-  btnBuyInForm = document.querySelector('#buyInForm'),
-  inputCardNumber = document.querySelector('#cardNumber')
-  dataStorage = JSON.parse(localStorage.getItem('formData'));
+  inputCardNumber = document.querySelector('#cardNumber'),
+  cardInputs = document.querySelectorAll('.card-input'),
+  pText = document.querySelector('#PText'),
+  pNum = document.querySelector('#PNum'),
+  titleFindCard = document.querySelector('.find')
+  getCard = document.querySelector('.getcard'),
+  visitProfile = document.querySelector('.visit-profile'),
+  countersBlock = document.querySelector('.modal__counters'),
+  cardCopy = document.querySelector('.modal__card-copy');
+dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
 window.addEventListener('DOMContentLoaded', () => {
   checkLoginAndLogIn();
 
@@ -70,60 +89,72 @@ window.addEventListener('DOMContentLoaded', () => {
   inputsBuyForm.forEach(function (input) {
     input.addEventListener('keyup', checkInputs);
   });
-// Check login user
-  function checkLoginAndLogIn() {
-    const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
-    const loggedInUser = dataStorage.find(user => user.loginStatus === true);
 
-    if (loggedInUser) {
-      LogIn();
-      loggedInUser.visitsCounter = (loggedInUser.visitsCounter || 0) + 1;
-      localStorage.setItem('formData', JSON.stringify(dataStorage));
-    }
-  }
-// Search item by ke in local storage
-  function searchItem(property) {
-    const foundObj = dataStorage.find(obj => obj.loginStatus === true);
-    if (foundObj && foundObj.hasOwnProperty(property)) {
-      return foundObj[property];
-    }
-  }
-
-// Update buttons in section Favorites after login
+  // Update buttons in section Favorites after login
   function updateBtn() {
     btnsBuy.forEach((btn) => {
       btn.setAttribute('data-buy', '');
     })
   }
-// Function login 
+
+  function updateDigitalCard() {
+    cardInputs.forEach(item => {
+      item.classList.add('none');
+    });
+    pText.textContent = searchItem('fullName');
+    pText.classList.remove('none');
+    pNum.textContent = searchItem('cardNumber');
+    pNum.classList.remove('none');  
+    btnCheck.classList.add('none');
+    countersBlock.classList.remove('none');
+    titleFindCard.textContent = 'Your Library card';
+  }
+  function returnDigitalCard() {
+    cardInputs.forEach(item => {
+      item.classList.add('add');
+    });
+    pText.classList.add('none');
+    pNum.classList.add('none');  
+    btnCheck.classList.remove('none');
+    countersBlock.classList.add('none');
+    titleFindCard.textContent = 'Find your Library card';
+  }
+
+
+  // Function login 
   function LogIn() {
     closeModal();
     updateIcon();
     postNumber();
     updateBtn();
-    iconAuth.setAttribute('title', searchItem('FullName'));
-    modalName.textContent = searchItem('FullName');
+    updateDigitalCard();
+    iconAuth.setAttribute('title', searchItem('fullName'));
+    modalName.textContent = searchItem('fullName');
+    getCard.classList.add('none');
+    visitProfile.classList.remove('none');
   };
   // Get capitalize first letters for profile
   function capitalizeFirstLetters(str) {
     return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   };
-// add number for profile
+  // add number for profile
   function postNumber() {
     const menuTitle = menuAuth.firstElementChild;
     menuTitle.textContent = searchItem('cardNumber');
     modalCardNumber.textContent = searchItem('cardNumber');
   };
 
-//  search initials, counters, toggle icons, update info in icons
+  //  search initials, counters, toggle icons, update info in icons
   function updateIcon() {
-    const initials = searchItem('FullName').match(/\b\w/g).join('');
-    const counter = searchItem('visitsCounter');
+    const initials = searchItem('fullName').match(/\b\w/g).join('');
+    const counter = searchItem('counter');
     profileIcon.classList.toggle('none');
     iconAuth.classList.toggle('none');
     iconAuth.textContent = initials;
     modalIcon.textContent = initials;
-    modalCounter.textContent = counter;
+    visitsCounter.forEach(item => {
+      item.textContent = counter;
+    });
   };
   // generate card number
   function generateCardNumber() {
@@ -140,36 +171,55 @@ window.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('formData', JSON.stringify(dataStorage));
     }
   }
-  // function sig in
-  function SignIn(form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const value1 = document.getElementById('firstName').value;
-      const value2 = document.getElementById('lastName').value;
-      const combinedValue = value1 + ' ' + value2;
-      const cardNumber = generateCardNumber();
 
-      const formSubmission = {
-        ...Object.fromEntries(formData.entries()),
-        FullName: capitalizeFirstLetters(combinedValue),
-        cardNumber,
-        loginStatus: true,
-        visitsCounter: 1
-      };
 
-      const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
-      dataStorage.push(formSubmission);
-      localStorage.setItem('formData', JSON.stringify(dataStorage));
-      closeModal();
+  // Check login user
+  function checkLoginAndLogIn() {
+    const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
+    const loggedInUser = dataStorage.find(user => user.loginStatus === true);
+
+    if (loggedInUser) {
       LogIn();
-    });
-  };
-  SignIn(formReg);
+    }
+  }
+  // Search item by ke in local storage
+  function searchItem(property) {
+    const foundObj = dataStorage.find(obj => obj.loginStatus === true);
+    if (foundObj && foundObj.hasOwnProperty(property)) {
+      return foundObj[property];
+    }
+  }
+
+
+  // registration
+  formReg.addEventListener('submit', (e) => {
+    const firstName = document.getElementById('firstName').value,
+      lastName = document.getElementById('lastName').value,
+      fullName = firstName + ' ' + lastName,
+      email = document.getElementById('email').value,
+      cardNumber = generateCardNumber();
+    passReg = document.getElementById('passReg').value;
+
+    e.preventDefault();
+
+    dataStorage.push(new NewUser(fullName, email, passReg, cardNumber, true, 1));
+
+    localStorage.setItem('formData', JSON.stringify(dataStorage));
+    closeModal();
+    LogIn();
+  })
 
 
 
-// close modals
+  cardCopy.addEventListener('click', () => {
+    const elementContent = document.querySelector('.modal__card-number').textContent;
+    navigator.clipboard.writeText(elementContent);
+  })
+
+
+
+
+  // close modals
   function closeModal() {
     modalLogIn.hide();
     modalReg.hide();
@@ -191,6 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       if (isPasswordMatch && isLoginMatch) {
         obj.loginStatus = true;
+        obj.counter += 1;
         localStorage.setItem('formData', JSON.stringify(dataStorage));
         checkLoginAndLogIn()
       }
@@ -199,10 +250,36 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
+  formCardBody.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.querySelector('#inputName').value;
+    const number = document.querySelector('#inputNumber').value;
+    const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
+
+    const matchedObject = dataStorage.find(obj => obj.fullName === name && obj.cardNumber === number);
+    if (matchedObject) {
+        const counterP = document.querySelector('[data-visitCounter]');
+        counterP.textContent = matchedObject.counter; 
+        countersBlock.classList.remove('none'); 
+        btnCheck.classList.add('none'); 
+
+        setTimeout(() => {
+            btnCheck.classList.remove('none');
+            countersBlock.classList.add('none'); 
+            formCardBody.reset();
+        }, 10000);
+
+    }
+});
+
+
+
+
   //  log out
   btnLogOut.addEventListener('click', () => {
     updateLoginStatus();
     updateIcon();
+    returnDigitalCard();
   });
 
 
@@ -216,8 +293,8 @@ window.addEventListener('DOMContentLoaded', () => {
     menu.classList.toggle('nav-list--opened');
   });
 
-  
-  
+
+
   //toggle Modal 
   document.addEventListener('click', (event) => {
     if (event.target.matches('[data-profile]')) {
@@ -244,7 +321,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-// close modal if click outside
+  // close modal if click outside
 
   modal.forEach(e => {
     e.addEventListener('mousedown', (event) => {
@@ -255,7 +332,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   });
 
-// close modal if press Escape
+  // close modal if press Escape
 
   document.addEventListener('keydown', (e) => {
     if (e.code === "Escape") {
@@ -264,7 +341,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  
+
   //Toggle menu if no authorisation
 
   document.addEventListener('click', (e) => {
@@ -276,7 +353,7 @@ window.addEventListener('DOMContentLoaded', () => {
       menu.classList.remove('nav-list--opened');
     }
   })
-//Toggle menu if yes authorisation
+  //Toggle menu if yes authorisation
 
   document.addEventListener('click', (e) => {
     if (e.target !== iconAuth) {
