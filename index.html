@@ -123,7 +123,7 @@
                 <div class="staff">
                     <p>Staff Picks</p>
                     <hr class="left">
-                    <p class="name-book">The Book EATERS</p>
+                    <p class="name-book">The Book Eaters</p>
                     <p class="writter">By Sunyi Dean</p>
                     <p class="desc-book">An unusual sci-fi story about a book eater woman who tries desperately to
                         save her dangerous mind-eater son from tradition and certain death. Complete with
@@ -137,7 +137,7 @@
                 <div class="staff">
                     <p>Staff Picks</p>
                     <hr class="left">
-                    <p class="name-book">CACKLE</p>
+                    <p class="name-book">Cackle</p>
                     <p class="writter">By Rachel Harrison</p>
                     <p class="desc-book">Are your Halloween movies of choice The Witches of Eastwick and Practical
                         Magic? Look no further than here - where a woman recovering from a breakup moves to a quaint
@@ -150,7 +150,7 @@
                 <div class="staff">
                     <p>Staff Picks</p>
                     <hr class="left">
-                    <p class="name-book">DANTE: POET OF THE SECULAR WORLD</p>
+                    <p class="name-book">Dante: Poet of the Secular World</p>
                     <p class="writter">By Erich Auerbach</p>
                     <p class="desc-book">Auerbach's engaging book places the 'Comedy' within the tradition of epic,
                         tragedy, and philosophy in general, arguing for Dante's uniqueness as one who raised the
@@ -164,7 +164,7 @@
                 <div class="staff">
                     <p>Staff Picks</p>
                     <hr class="left">
-                    <p class="name-book">THE LAST QUEEN</p>
+                    <p class="name-book">The Last Queen</p>
                     <p class="writter">By Clive Irving</p>
                     <p class="desc-book">A timely and revelatory new biography of Queen Elizabeth (and her family)
                         exploring how the Windsors have evolved and thrived as the modern world has changed around
@@ -426,12 +426,19 @@
             <div class="text-info">
                 <p class="phone-info" style="margin-bottom:40px; font-weight: bold;">For all Library inquiries:</p>
                 <p class="phone-info" style="margin-bottom:20px;">Please call <a class="number"
-                        href="tel:+6177302385">(617) 730-2370</a></p>
-                <p class="phone-info" style="margin-bottom:20px;">For TTY service, please call <a class="number"
-                        href="tel:+6177302385">(617) 730-2370</a></p>
-                <p class="phone-info" style="margin-bottom:40px;">Putterham Library: <a class="number"
-                        href="tel:+6177302385">(617) 730-2385</a></p>
-                <p class="phone-info" style="margin-bottom:40px; font-weight: bold;">Senior Staff</p>
+                        href="tel:+6177302385">(617) 730-2370</a>
+                    </p>
+                <p class="phone-info" style="margin-bottom:20px;">For TTY service, please call 
+                    <a class="number" href="tel:+6177302385">(617) 730-2370</a>
+                    </p>
+                <p class="phone-info" style="margin-bottom:40px;">
+                    Putterham Library: 
+                    <a class="number" href="tel:+6177302385">(617) 730-2385</a>
+                    </p>
+                <p class="phone-info" style="margin-bottom:40px; font-weight: bold;">
+                    Senior Staff
+
+                </p>
                 <p class="phone-info">Library Director: <a class="mail" href="mailto:AmandaHirst@gmail.com">Amanda
                         Hirst</a></p>
             </div>
@@ -544,7 +551,7 @@
                     </label>
                     <input required class="modal__input" id="pass" name="password" type="password">
                 </div>
-                <button class="log-in">Log in</button>
+                <button class="sign-login-btn">Log in</button>
             </form>
             <div class="modal__aside">
                 <p class="modal__aside-text">Don’t have an account?</p>
@@ -585,7 +592,7 @@
                     </label>
                     <input required class="modal__input" id="passReg" minlength="8" type="password" name="password">
                 </div>
-                <button data-register class="sign-up">Sign Up</button>
+                <button data-register class="sign-login-btn">Sign Up</button>
             </form>
             <div class="modal__aside">
                 <p class="modal__aside-text">Already have an account?</p>
@@ -622,7 +629,7 @@
                             Books
                         </p>
                         <img src="src/images/book.svg" alt="">
-                        <p class="modal__counter"></p>
+                        <p data-booksCounter class="modal__counter"></p>
                     </div>
                 </div>
                 <div class="modal__books">
@@ -686,6 +693,16 @@
             </div>
         </div>
     </div>
+    <script>
+        window.addEventListener('scroll', () => {
+            const favoritesNav = document.querySelector('.seasons');
+            if (window.scrollY > 1679 && window.innerWidth <= 768){
+                favoritesNav.classList.add('fixed');
+            } else if (window.scrollY > 2982 ) {
+                favoritesNav.classList.remove('fixed');
+            };
+        })
+    </script>
     <script src="src/js/script.js"></script>
     <script src="src/js/slider.js"></script>
 </body>
