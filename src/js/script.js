@@ -234,9 +234,9 @@ window.addEventListener('DOMContentLoaded', () => {
   };
   // generate card number
   function generateCardNumber() {
-    const hexNumber = Math.floor(Math.random() * 0x1000000000).toString(16);
+    const hexNumber = Math.floor(Math.random() * 0x1000000000).toString(16).toUpperCase();
     return hexNumber.padStart(9, '0');
-  };
+  }
   //check login status and toggle false
   function updateLoginStatus() {
     const dataStorage = JSON.parse(localStorage.getItem('formData')) || [];
