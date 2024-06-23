@@ -1,11 +1,12 @@
 class NewUser {
-  constructor(fullName, email, password, cardNumber, statusLogin, counter) {
+  constructor(fullName, email, password, cardNumber, statusLogin, counter, booksCounter) {
     this.fullName = fullName;
     this.email = email;
     this.password = password;
     this.loginStatus = statusLogin;
     this.cardNumber = cardNumber;
     this.counter = counter;
+    this.booksCounter  = booksCounter;
   }
 }
 class Modal {
@@ -285,7 +286,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     e.preventDefault();
 
-    dataStorage.push(new NewUser(fullName, email, passReg, cardNumber, true, 1));
+    dataStorage.push(new NewUser(fullName, email, passReg, cardNumber, true, 1, 0));
 
     localStorage.setItem('formData', JSON.stringify(dataStorage));
     closeModal();
